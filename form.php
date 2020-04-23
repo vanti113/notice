@@ -30,6 +30,12 @@ print <<< _html_
 <tr><td align="center"><input type="submit" name="insert" value="글쓰기"><input type="submit" name="read" value="글읽기"><input type="submit" name="update" value="글수정"><input type="submit" name="delete" value="글삭제"></td></tr>
 </form>
 </table>
+<br/>
+<div><p>
+_html_;
+print $contents_errors;
+print <<<_html_
+</p></div>
 </div></body>
 </html>
 _html_;
