@@ -27,7 +27,8 @@ for($i = 0; $i < count($GLOBALS['list_num']); $i++){
 print <<< _html_
 </table>
 <table width="1000px" height="40px">
-<tr><td align="center"><input type="submit" name="insert" value="글쓰기"><input type="submit" name="read" value="글읽기"><input type="submit" name="update" value="글수정"><input type="submit" name="delete" value="글삭제"></td></tr>
+<tr><td align="center"><input type="submit" name="insert" value="글쓰기"><input type="submit" name="read" value="글읽기"><input type="submit" name="update" value="글수정">
+<input type="submit" name="delete" value="글삭제"><input type="reset"></td></tr>
 </form>
 </table>
 <br/>
