@@ -1,7 +1,7 @@
 <?php
 
-$list_num = array(); // check박스의 번호
-$G_point = array();
+$list_num = array(); // check박스의 번호지만 post방식으로 리로딩이 될때 이 배열은 초기화 된다.
+$G_point; //이 변수 역시 페이지가 리로딩이 될때 초기화 된다.
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -11,6 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	if ($_POST['update']) {
 		$point = $_POST['check'];
+		$GLOBALS['G_point'] = $point;
+
+		var_dump($GLOBALS['G_point']);
 
 		try {
 			$db = new PDO('mysql:host=localhost:3307;dbname=notice2', 'root', '111111');
@@ -28,8 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	if ($_POST['title_update']) {
-		/* print $_POST['title_update'];
-		print $_POST['comments_update']; */
+		
 		list($write_data, $write_error) = validate_form();
 
 		print $_POST['title_num'];
@@ -50,27 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}else{
 			print "오류가 발생했습니다.";
 		}
-
-		/*error_reporting(E_ALL);
-		ini_set("display_errors",1);
-		$sql ="UPDATE notice_board SET title = '$title' WHERE p_id = $check_point";
-		
-		$obj = $db->prepare($sql);
-		$obj->execute();
-		echo $obj->rowCount()."줄이 성공적으로 반영되었습니다.";
-		if ($obj) {
-			print "정상 수정되었습니다.";
-		} else {
-			print "수정되지 않았습니다.";
-		}
-*/
-		/* print <<< _html_
-		<div align="center" style="padding:10%;">
-		<h2>기록되었습니다.</h2><br/><br/>
-		<form method="GET" action="main_page.php"><input type="submit" value="돌아가기">
-		</form>
-		</div>
-		_html_; */
 	}
 
 	if ($_POST['delete']) {
@@ -154,7 +135,6 @@ function show_form($errors = array())
 
 	require "form.php";
 }
-//var_dump($list_num);
 
 function validate_form()
 {

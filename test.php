@@ -3,19 +3,28 @@
 
 
 
-try {
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-	$db = new PDO('mysql:host=localhost:3307;dbname=notice2','root','111111');
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-} catch (PDOException $e) {
-	print "다음과 같은 오류로 실행할수 없습니다.".$e->getMessage();
+print $_POST['test'];
+print "<br/>";
+print $_POST['test2'];
+print $testpoint;
+
+}else{
+
+$testpoint = "Reloading?";
+print <<< _html_
+
+<form method="post" action="$_SERVER[PHP_SELF]">
+<input type="text" name="test" value="1" disabled>
+<p>$testpoint</p>
+<input type="text" name="test2"> 
+<input type="submit">
+_html_;
+
+
 }
-$title = "테스트 주도 개발";
-$comments = "실험 대상 1호로 지목된";
+$testpoint = "default";
 
-$result = $db->exec("UPDATE notice_board SET title='$title', comments='$comments' WHERE p_id=1");
-
-echo $result;
 
 ?>
