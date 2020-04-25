@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	if ($_POST['title_update']) {
-		
+
 		list($write_data, $write_error) = validate_form();
 
 		print $_POST['title_num'];
@@ -46,12 +46,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		} catch (PDOException $e) {
 			print "다음과 같은 에러가 발생했습니다." . $e->getMessage();
 		}
-		var_dump($obj);
-		if(is_int($obj)){
-			print "게시글이 정상 수정 되었습니다.";
-		}else{
-			print "오류가 발생했습니다.";
+		print <<<_html_
+<!doctype html>
+<html><meta charset="utf-8">
+<head><title>게시글 수정 현황</title></head>
+<body>
+<div align="center" style="padding:5%;">
+_html_;
+		if (is_int($obj)) {
+			print "<h2>정상적으로 수정되었습니다.</h2><hr />";
+		} else {
+			print "<h2>수정이 불가능합니다. 오류를 찾아주세요.</h2><hr />";
 		}
+		print <<<_html_
+<br />
+<form method="GET" action="main_page.php">
+	<input type="submit" value="돌아가기">
+</form>
+</div>
+</body>
+</html>
+_html_;
 	}
 
 	if ($_POST['delete']) {
