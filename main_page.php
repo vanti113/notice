@@ -34,20 +34,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		print $_POST['title_num'];
 		$check_point = $_POST['title_num'];
-		var_dump($write_data);
+		var_dump($check_point);
 		$title = $write_data['title'];
 		$comments = $write_data['comments'];
 		try {
 			$db = new PDO('mysql:host=localhost:3307;dbname=notice2', 'root', '111111');
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$obj = $db->exec("UPDATE notice_board SET title = '$title', comment = '$comments' WHERE p_id = $check_point");
+			$obj = $db->exec("UPDATE notice_board SET title = '$title', comments = '$comments' WHERE p_id = $check_point");
 		} catch (PDOException $e) {
 			print "다음과 같은 에러가 발생했습니다." . $e->getMessage();
 		}
-		$title = $write_data['title'];
-		$comments = $write_data['comments'];
-		var_dump($title);
-		error_reporting(E_ALL);
+		var_dump($obj);
+		if(is_int($obj)){
+			print "게시글이 정상 수정 되었습니다.";
+		}else{
+			print "오류가 발생했습니다.";
+		}
+
+		/*error_reporting(E_ALL);
 		ini_set("display_errors",1);
 		$sql ="UPDATE notice_board SET title = '$title' WHERE p_id = $check_point";
 		
@@ -59,14 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		} else {
 			print "수정되지 않았습니다.";
 		}
-
+*/
 		/* print <<< _html_
 		<div align="center" style="padding:10%;">
 		<h2>기록되었습니다.</h2><br/><br/>
 		<form method="GET" action="main_page.php"><input type="submit" value="돌아가기">
 		</form>
 		</div>
-_html_; */
+		_html_; */
 	}
 
 	if ($_POST['delete']) {
@@ -123,7 +127,7 @@ _html_; */
 		<form method="GET" action="main_page.php"><input type="submit" value="돌아가기">
 		</form>
 		</div>
-_html_;
+		_html_;
 	}
 } else {
 	show_form();

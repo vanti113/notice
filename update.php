@@ -13,7 +13,7 @@ print <<< _html_
 			<div class="update_colomn" align="center" style="padding: 5%;">
 				<h2>게시글 수정</h2>
 				<hr />
-				<label>번호:</label><input type="text" name="title_num" value="$point"/ disabled>
+				<label>번호:</label><input type="text" name="title_num" value="$point"/>
         <label>제목 : </label
         ><input type="text" name="title_update" style="width: 400px;" value="$v[title]" />
         <br /><br />
