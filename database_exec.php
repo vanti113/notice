@@ -44,7 +44,7 @@ function page_update($updated_data, $point)
 	}
 	$title = $updated_data['title'];
 	$comments = $updated_data['comments'];
-	$obj = $db->exec("UPDATE notice_board SET title = '$title', comment = '$comments' WHERE p_id = $point");
+	$obj = $db->exec("UPDATE notice_board SET title = '$title', comments = '$comments' WHERE p_id = $point");
 	if ($obj) {
 		print "정상 수정되었습니다.";
 	}else{
